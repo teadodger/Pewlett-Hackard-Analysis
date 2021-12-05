@@ -72,3 +72,23 @@ FROM retirement_titles
 ORDER BY emp_no, to_date DESC;
 
 SELECT * FROM retirement_current_title
+
+-- Create the mentorship table
+
+SELECT  e.emp_no,
+		e.first_name,
+        e.last_name,
+		e.birth_date,
+		de.from_date,
+		de.to_date,
+		tt.title
+INTO mentorship_eligibilty
+FROM employees AS e 
+	INNER JOIN dept_emp AS de 
+		ON (e.emp_no = de.emp_no)
+    INNER JOIN titles AS tt
+        ON (de.emp_no = tt.emp_no)
+	WHERE (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31')
+	ORDER BY emp_no ASC;
+	
+SELECT * FROM mentorship_eligibilty
