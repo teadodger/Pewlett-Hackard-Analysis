@@ -61,3 +61,14 @@ ON (de.dept_no = d.dept_no);
 SELECT * FROM retirement_titles
 ORDER BY emp_no ASC;
 
+-- Use Distinct with Orderby to remove duplicate rows
+SELECT DISTINCT ON (emp_no) emp_no,
+first_name,
+last_name,
+title
+
+INTO retirement_current_title
+FROM retirement_titles
+ORDER BY emp_no, to_date DESC;
+
+SELECT * FROM retirement_current_title
