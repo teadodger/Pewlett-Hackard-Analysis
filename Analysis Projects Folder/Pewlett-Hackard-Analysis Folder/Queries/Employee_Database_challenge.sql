@@ -75,6 +75,35 @@ ORDER BY emp_no, to_date DESC;
 
 SELECT * FROM mentorship_eligibility
 
-
+--looking for how many folks are between 1955-1964
+SELECT e.emp_no,
+    e.first_name,
+	e.last_name,
+    e.gender,
+    s.salary,
+    de.to_date
+-- INTO emp_info_1956_1964
+FROM employees as e
+INNER JOIN salaries as s
+ON (e.emp_no = s.emp_no)
+INNER JOIN dept_emp as de
+ON (e.emp_no = de.emp_no)
+WHERE (e.birth_date BETWEEN '1956-01-01' AND '1964-12-31')
+	 AND (de.to_date = '9999-01-01');
+	 
+-- Count of all active employees
+SELECT e.emp_no,
+    e.first_name,
+	e.last_name,
+    e.gender,
+    s.salary,
+    de.to_date
+--INTO emp_info_all
+FROM employees as e
+INNER JOIN salaries as s
+ON (e.emp_no = s.emp_no)
+INNER JOIN dept_emp as de
+ON (e.emp_no = de.emp_no)
+WHERE (de.to_date = '9999-01-01');
 
 
